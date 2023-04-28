@@ -14,10 +14,12 @@ export default function BasicDatePicker() {
     }
 
     return (
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DemoContainer components={['DatePicker']}>
-                <DatePicker disablePast={true} onChange={(newValue) => { handleChange(newValue) }} label="Controlled picker" />
-            </DemoContainer>
-        </LocalizationProvider>
+        <div>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DemoContainer sx={{display:'block'}} components={['DatePicker']}>
+                    <DatePicker disablePast={true} onChange={(newValue) => { handleChange(newValue) }} label="Controlled picker" />
+                </DemoContainer>
+            </LocalizationProvider>
+        </div>
     );
 }

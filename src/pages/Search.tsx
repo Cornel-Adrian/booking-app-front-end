@@ -10,9 +10,6 @@ const Company = {
     companyDescription: "Description",
 }
 
-
-
-
 function Search() {
 
 
