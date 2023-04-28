@@ -28,7 +28,7 @@ function Login() {
                         type="password"
                         autoComplete="current-password"
                     />
-                    <Button variant="contained" size="medium">Login</Button>
+                    <Button sx={{mx:'auto'}} variant="contained" size="medium">Login</Button>
                 </div>
             </Box >
         </div >)

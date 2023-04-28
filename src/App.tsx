@@ -4,15 +4,22 @@ import Company from './pages/Company';
 import Search from './pages/Search';
 import Service from './pages/Service';
 import ResponsiveAppBar from './components/ResponsiveAppBar';
+import OrderDone from './pages/OrderDone';
+import { Routes, Route } from "react-router-dom";
+
+
 
 function App() {
   return (
     <div className="App">
       <ResponsiveAppBar></ResponsiveAppBar>
-      <div>
-        <Service></Service>
-      </div>
-
+      <Routes>
+        <Route path="/" element={<Login />}></Route>
+        <Route path='search' element={<Search />}></Route>
+        <Route path='company' element={<Company />}></Route>
+        <Route path='service' element={<Service />}></Route>
+        <Route path='orderdone' element={<OrderDone />}></Route>
+      </Routes>
     </div>
   );
 }
