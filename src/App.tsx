@@ -1,6 +1,8 @@
 import './App.css';
 import Login from './pages/Login';
+import Company from './pages/Company';
 import Search from './pages/Search';
+import Service from './pages/Service';
 import ResponsiveAppBar from './components/ResponsiveAppBar';
 
 function App() {
@@ -8,7 +10,7 @@ function App() {
     <div className="App">
       <ResponsiveAppBar></ResponsiveAppBar>
       <div>
-        <Search />
+        <Service></Service>
       </div>
 
     </div>
