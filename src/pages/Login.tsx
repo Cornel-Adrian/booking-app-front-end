@@ -4,6 +4,7 @@ import Button from '@mui/material/Button';
 import './Login.css';
 import { useEffect, useState } from 'react';
 import { useUserLogin } from '../hooks/useUserLogin';
+import { useSignIn } from 'react-auth-kit';
 
 
 function Login() {
@@ -12,12 +13,21 @@ function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const { data, isLoading, mutate: login, isSuccess, isError } = useUserLogin();
+    const signIn = useSignIn();
 
     useEffect(() => {
         if (isSuccess) {
             console.log('Login success');
-            localStorage.setItem('access-token', data.auth_token);
-            localStorage.setItem('refresh-token', data.refresh_token);
+            if (signIn(
+                {
+                    token: data.auth_token,
+                    expiresIn: 3600,
+                    tokenType: "Bearer",
+                    authState: { email: email },
+                    refreshToken: data.refresh_token,
+                    refreshTokenExpireIn: 3600
+                }
+            )) { console.log('Login success') }
         } else if (isError) {
             console.log('Login success');
         } else return;
@@ -27,8 +37,8 @@ function Login() {
         login({ email, password }); // Login api call
     };
 
-    
-    
+
+
     if (isLoading) <div>Loading...</div>;
 
 

@@ -6,6 +6,7 @@ type LoginData = {
   password: string;
 };
 
+
 const postUserData = async (data: LoginData) => {
   const res = await axiosInstance.post("auth/login", data).then((res) => {
 
