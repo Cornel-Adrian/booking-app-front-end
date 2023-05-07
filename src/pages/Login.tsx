@@ -3,7 +3,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import './Login.css';
 import { useEffect, useState } from 'react';
-import axios from '../api/axios';
+import { useUserLogin } from '../hooks/useUserLogin';
 
 
 function Login() {
@@ -11,24 +11,25 @@ function Login() {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
-
-    const handleLogin = async () => {
-
-        console.log("Ce plm")
-        await axios.post("/auth/login", { 'email': email, 'password': password }).then((res) => {
-            console.log(res.data.accessToken);
-        }).catch((err) => {
-            console.log("Error:" + err);
-        });
-
-    }
+    const { data, isLoading, mutate: login, isSuccess, isError } = useUserLogin();
 
     useEffect(() => {
+        if (isSuccess) {
+            console.log('Login success');
+            localStorage.setItem('access-token', data.auth_token);
+            localStorage.setItem('refresh-token', data.refresh_token);
+        } else if (isError) {
+            console.log('Login success');
+        } else return;
+    }, [isSuccess, isError]);
 
+    const handleSubmit = () => {
+        login({ email, password }); // Login api call
+    };
 
-    }, [])
-
+    
+    
+    if (isLoading) <div>Loading...</div>;
 
 
     return (
@@ -56,7 +57,7 @@ function Login() {
                         autoComplete="current-password"
                         onChange={(e) => setPassword(e.target.value)}
                     />
-                    <Button sx={{ mx: 'auto', background: '#2c5d4f' }} onClick={handleLogin} variant="contained" size="medium">Login</Button>
+                    <Button sx={{ mx: 'auto', background: '#2c5d4f' }} onClick={handleSubmit} variant="contained" size="medium">Login</Button>
                 </div>
             </Box >
         </div >)

@@ -8,7 +8,6 @@ function OrderDone() {
 
         <Typography variant="h2" sx={{my:"140px", fontFamily:'serif'}}>Thank you for your purchase</Typography>
 
-
     </Container>);
 }
 
