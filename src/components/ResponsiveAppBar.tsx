@@ -12,6 +12,9 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import logo from './logo.png'
+import { useSignOut } from 'react-auth-kit'
+import { To, useNavigate } from "react-router-dom";
+
 
 const settings = ['Account', 'Orders', 'Logout'];
 
@@ -34,11 +37,18 @@ function ResponsiveAppBar() {
     setAnchorElUser(null);
   };
 
+  const signOut = useSignOut();
+  const navigate = useNavigate();
+
+  function redirect(url: { toString: To; }) {
+    navigate(url.toString);
+  }
+
   return (
-    <AppBar position="static" sx={{background:"#2c5d4f"}}>
+    <AppBar position="static" sx={{ background: "#2c5d4f" }}>
       <Container maxWidth="xl">
-        <Toolbar disableGutters sx={{display:'flex' , justifyContent:'space-between', mx:'10%'}}>
-          <img src={logo} height={'40px'} width={'40px'}></img>
+        <Toolbar disableGutters sx={{ display: 'flex', justifyContent: 'space-between', mx: '10%' }}>
+          <img alt='logo' src={logo} height={'40px'} width={'40px'}></img>
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
@@ -94,7 +104,7 @@ function ResponsiveAppBar() {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                <MenuItem href={'/' + setting.toString().toLocaleLowerCase()} key={setting} onClick={handleCloseUserMenu}>
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}

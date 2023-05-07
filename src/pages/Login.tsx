@@ -23,7 +23,7 @@ function Login() {
                     token: data.auth_token,
                     expiresIn: 3600,
                     tokenType: "Bearer",
-                    authState: { email: email },
+                    authState: { email: email, role: data.role },
                     refreshToken: data.refresh_token,
                     refreshTokenExpireIn: 3600
                 }

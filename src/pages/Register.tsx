@@ -2,7 +2,6 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { useEffect, useState } from 'react';
-import { auto } from '@popperjs/core';
 import { useUserRegister } from '../hooks/useUserRegister';
 
 

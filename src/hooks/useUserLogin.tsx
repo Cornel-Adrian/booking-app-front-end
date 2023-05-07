@@ -15,6 +15,7 @@ const postUserData = async (data: LoginData) => {
       // Change the path of reading the values from response as per your backend reponse
       auth_token: res.data['accessToken'],
       refresh_token: res.data['refreshToken'],
+      role: res.data['role']
     };
   });
 
