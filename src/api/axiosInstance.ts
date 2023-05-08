@@ -12,7 +12,7 @@ axiosClient.defaults.headers.common['Content-Type'] = 'application/json';
 
 axiosClient.interceptors.request.use(
     (config: { headers: any; }) => {
-        const token = localStorage.getItem('access-token');
+        const token = localStorage.getItem('_auth');
         if (token) {
             // Configure this as per your backend requirements
             config.headers!['Authorization'] = token;

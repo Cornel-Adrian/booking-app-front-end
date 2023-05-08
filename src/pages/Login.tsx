@@ -3,8 +3,8 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import './Login.css';
 import { useEffect, useState } from 'react';
-import { useUserLogin } from '../hooks/useUserLogin';
 import { useSignIn } from 'react-auth-kit';
+import axiosClient from '../api/axiosInstance';
 
 
 function Login() {
@@ -12,34 +12,38 @@ function Login() {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const { data, isLoading, mutate: login, isSuccess, isError } = useUserLogin();
+
     const signIn = useSignIn();
 
     useEffect(() => {
-        if (isSuccess) {
-            console.log('Login success');
-            if (signIn(
-                {
-                    token: data.auth_token,
-                    expiresIn: 3600,
-                    tokenType: "Bearer",
-                    authState: { email: email, role: data.role },
-                    refreshToken: data.refresh_token,
-                    refreshTokenExpireIn: 3600
-                }
-            )) { console.log('Login success') }
-        } else if (isError) {
-            console.log('Login success');
-        } else return;
-    }, [isSuccess, isError]);
+
+    }, []);
 
     const handleSubmit = () => {
-        login({ email, password }); // Login api call
+        //login({ email, password }); // Login api call
+
+        try {
+            axiosClient.post('auth/login', { 'email': email, 'password': password }).then((res) => {
+
+                if (signIn(
+                    {
+                        token: res.data.accessToken,
+                        expiresIn: 3600,
+                        tokenType: "Bearer",
+                        authState: { email: email, role: res.data.role },
+                        //refreshToken: res.data.refreshToken,
+                        //refreshTokenExpireIn: 3600
+                    }
+                )) { console.log('Success'); }
+            })
+        } catch (err) {
+            console.log("Error: ", err);
+        }
+
     };
 
 
 
-    if (isLoading) <div>Loading...</div>;
 
 
     return (

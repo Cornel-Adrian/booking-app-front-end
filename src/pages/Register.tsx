@@ -1,8 +1,7 @@
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import { useEffect, useState } from 'react';
-import { useUserRegister } from '../hooks/useUserRegister';
+import { useState } from 'react';
 
 
 function Register() {
@@ -12,21 +11,9 @@ function Register() {
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
 
-    const { mutate: register, isSuccess, isError } = useUserRegister();
-
-
-    useEffect(() => {
-        if (isSuccess) {
-            console.log('Register success');
-            
-        } else if (isError) {
-            console.log('Register fail');
-        } else return;
-    }, [isSuccess, isError]);
-
 
     function handleSubmit(){
-        register({name, email, password});
+
     }
 
     return (
