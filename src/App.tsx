@@ -6,7 +6,10 @@ import ResponsiveAppBar from './components/ResponsiveAppBar';
 import Order from './pages/Order';
 import { Routes, Route } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import Register from './pages/Register';
 import { RequireAuth } from 'react-auth-kit'
+import Orders from './pages/Orders';
+import Buynow from './pages/Buynow';
 
 
 
@@ -22,6 +25,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Login />} />
             <Route path="login" element={<Login />} />
+            <Route path="register" element={<Register />} />
             <Route path="search" element={
               <RequireAuth loginPath='/login'>
                 <Search />
@@ -32,9 +36,19 @@ function App() {
                 <Company />
               </RequireAuth>
             } />
-            <Route path="order" element={
+            <Route path="order-done:id" element={
               <RequireAuth loginPath='/login'>
                 <Order />
+              </RequireAuth>
+            } />
+            <Route path="orders" element={
+              <RequireAuth loginPath='/login'>
+                <Orders />
+              </RequireAuth>
+            } />
+            <Route path="buynow" element={
+              <RequireAuth loginPath='/login'>
+                <Buynow name={'asds'} description={'description'} price={12} />
               </RequireAuth>
             } />
           </Routes>

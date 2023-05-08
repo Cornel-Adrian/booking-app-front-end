@@ -2,7 +2,7 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 
 
-function OrderDone() {
+function Order() {
     return (
     <Container maxWidth="xl">
 
@@ -12,4 +12,4 @@ function OrderDone() {
 }
 
 
-export default OrderDone;
+export default Order;

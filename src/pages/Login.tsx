@@ -2,9 +2,10 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import './Login.css';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useSignIn } from 'react-auth-kit';
 import axiosClient from '../api/axiosInstance';
+import { useNavigate } from 'react-router-dom';
 
 
 function Login() {
@@ -12,15 +13,10 @@ function Login() {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
     const signIn = useSignIn();
-
-    useEffect(() => {
-
-    }, []);
+    let navigate = useNavigate();
 
     const handleSubmit = () => {
-        //login({ email, password }); // Login api call
 
         try {
             axiosClient.post('auth/login', { 'email': email, 'password': password }).then((res) => {
@@ -34,7 +30,7 @@ function Login() {
                         //refreshToken: res.data.refreshToken,
                         //refreshTokenExpireIn: 3600
                     }
-                )) { console.log('Success'); }
+                )) { navigate('/Search') }
             })
         } catch (err) {
             console.log("Error: ", err);
