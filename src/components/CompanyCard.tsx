@@ -2,22 +2,26 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
-import './CompanyCard.css';
+import { useNavigate } from 'react-router-dom'
 
 
 export interface CompanyProps {
 
   companyName: string,
   companyDescription: string,
-  id: string,
+  companyId: string,
 }
 
 
-export default function CompanyCard({ companyName, companyDescription }: CompanyProps) {
+export default function CompanyCard({ companyId, companyName, companyDescription }: CompanyProps) {
+
+  const navigate = useNavigate();
+
+
   return (
-    <Card className='card' sx={{ maxWidth: 300 , minWidth: 250}}>
+    <Card onClick={() => { navigate('company/' + companyId) }} sx={{ margin: '8rem', minWidth: 275, }}>
       <CardActionArea>
-        <CardContent>
+        <CardContent >
           <Typography gutterBottom variant="caption" component="div">
             {companyName}
           </Typography>

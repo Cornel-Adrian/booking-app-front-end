@@ -10,6 +10,7 @@ import Register from './pages/Register';
 import { RequireAuth } from 'react-auth-kit'
 import Orders from './pages/Orders';
 import Buynow from './pages/Buynow';
+import Logout from './pages/Logout';
 
 
 
@@ -19,41 +20,46 @@ function App() {
 
   return (
 
-      <QueryClientProvider client={queryClient}>
-        <div className="App" >
-          <ResponsiveAppBar></ResponsiveAppBar>
-          <Routes>
-            <Route path="/" element={<Login />} />
-            <Route path="login" element={<Login />} />
-            <Route path="register" element={<Register />} />
-            <Route path="search" element={
-              <RequireAuth loginPath='/login'>
-                <Search />
-              </RequireAuth>
-            } />
-            <Route path="company/:companyId" element={
-              <RequireAuth loginPath='/login'>
-                <Company />
-              </RequireAuth>
-            } />
-            <Route path="order-done:id" element={
-              <RequireAuth loginPath='/login'>
-                <Order />
-              </RequireAuth>
-            } />
-            <Route path="orders" element={
-              <RequireAuth loginPath='/login'>
-                <Orders />
-              </RequireAuth>
-            } />
-            <Route path="buynow" element={
-              <RequireAuth loginPath='/login'>
-                <Buynow name={'asds'} description={'description'} price={12} />
-              </RequireAuth>
-            } />
-          </Routes>
-        </div>
-      </QueryClientProvider >
+    <QueryClientProvider client={queryClient}>
+      <div className="App" >
+        <ResponsiveAppBar></ResponsiveAppBar>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
+          <Route path="search" element={
+            <RequireAuth loginPath='/login'>
+              <Search />
+            </RequireAuth>
+          } />
+          <Route path="company/:companyId" element={
+            <RequireAuth loginPath='/login'>
+              <Company/>
+            </RequireAuth>
+          } />
+          <Route path="order-done/:id" element={
+            <RequireAuth loginPath='/login'>
+              <Order />
+            </RequireAuth>
+          } />
+          <Route path="orders" element={
+            <RequireAuth loginPath='/login'>
+              <Orders />
+            </RequireAuth>
+          } />
+          <Route path="company/:companyId/buynow/:name/:description/:price" element={
+            <RequireAuth loginPath='/login'>
+              <Buynow />
+            </RequireAuth>
+          } />
+           <Route path="logout" element={
+            <RequireAuth loginPath='/login'>
+              <Logout />
+            </RequireAuth>
+          } />
+        </Routes>
+      </div>
+    </QueryClientProvider >
   );
 }
 

@@ -3,16 +3,18 @@ import Container from '@mui/material/Container';
 import axiosClient from '../api/axiosInstance';
 import { useParams } from "react-router";
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 
 
 function Company() {
 
-     type ServiceProps = {
+    type ServiceProps = {
         name: string;
         description: string;
         price: number;
-      }
-      
+    }
+
 
 
     interface companyInterface {
@@ -27,6 +29,9 @@ function Company() {
     const { companyId } = useParams();
     const [company, setCompany] = useState<companyInterface>();
     let companyService = company?.services;
+    const navigate = useNavigate();
+
+
     useEffect(() => {
         try {
             axiosClient.get('company/' + companyId).then((res) => {
@@ -38,8 +43,6 @@ function Company() {
 
         return
     }, [])
-
-
 
     return (
 
@@ -65,10 +68,14 @@ function Company() {
                                     <TableCell>{row.name}</TableCell>
                                     <TableCell>{row.description}</TableCell>
                                     <TableCell align='center'>{row.price}</TableCell>
-                                    <TableCell align='right'><Button sx={{ background: '#2c5d4f' }} variant="contained">Buy Now</Button></TableCell>
+                                    <TableCell align='right'>
+                                        <Button sx={{ background: '#2c5d4f' }} variant="contained" onClick={() => {
+                                            navigate('/buynow/' + row.name + '/' + row.description + '/' + row.price);
+                                        }}>Buy Now</Button>
+                                    </TableCell>
                                 </TableRow>
-                            )) : <div>No services available</div>}
-                        </TableBody>
+                            )) : <Container sx={{ display: 'block' }}><Typography variant='h3' sx={{ mx: '10', textAlign: 'center' }}>No services available</Typography></Container>
+                            }</TableBody>
                     </Table>
                 </TableContainer >
             </Container>
