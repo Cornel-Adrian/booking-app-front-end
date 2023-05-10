@@ -1,5 +1,7 @@
 import { TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody } from '@mui/material';
 import Container from '@mui/material/Container';
+import { useEffect, useState } from 'react';
+import axiosClient from '../api/axiosInstance';
 
 
 function Orders() {
@@ -14,7 +16,18 @@ function Orders() {
         price: number;
     }
 
-    let companyService: Order[] = [];
+    const [orders, setOrders] = useState([]);
+    const { email } = JSON.parse(localStorage.getItem('_auth_state') || '');
+
+
+    useEffect(() => {
+        axiosClient.get('/orders/email/' + email).then((res) => {
+            setOrders(res.data);
+        })
+
+    }, [])
+
+
 
     return (
         <Container maxWidth="xl">
@@ -29,14 +42,14 @@ function Orders() {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {companyService ? companyService.map((row: Order) => (
+                        {orders ? orders.map((row: Order) => (
                             <TableRow
                                 key={row.orderId}
                             >
                                 <TableCell>{row.serviceName}</TableCell>
-                                <TableCell>{row.desiredDate}</TableCell>
+                                <TableCell>{row.desiredDate.slice(0,10)}</TableCell>
                                 <TableCell align='center'>{row.price}</TableCell>
-                                <TableCell align='right'></TableCell>
+                                <TableCell align='right'>{row.status}</TableCell>
                             </TableRow>
                         )) : <div>Nothing purchased</div>}
                     </TableBody>

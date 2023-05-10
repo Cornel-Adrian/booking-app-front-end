@@ -53,7 +53,7 @@ function Search() {
     const paginatedCards: Company[] = companies.slice(startIndex, endIndex);
 
     const submitSearch = () => {
-        console.log(search);
+        
     }
 
 

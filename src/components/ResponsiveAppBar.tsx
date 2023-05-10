@@ -22,7 +22,7 @@ const settings = ['Account', 'Orders', 'Logout'];
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
-  const isAuthenticated = useIsAuthenticated()
+  const isAuthenticated = useIsAuthenticated();
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -39,7 +39,6 @@ function ResponsiveAppBar() {
     setAnchorElUser(null);
   };
 
-  const signOut = useSignOut();
   const navigate = useNavigate();
 
 
@@ -109,6 +108,7 @@ function ResponsiveAppBar() {
                     <Typography textAlign="center">{setting}</Typography>
                   </MenuItem>
                 ))}
+                
               </Menu>
             </Box>
           </Toolbar>
@@ -116,6 +116,6 @@ function ResponsiveAppBar() {
       </AppBar>
     );
   }
-  else return(<div></div>);
+  else return (<div></div>);
 }
 export default ResponsiveAppBar;

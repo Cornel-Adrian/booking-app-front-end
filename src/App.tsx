@@ -3,7 +3,7 @@ import Login from './pages/Login';
 import Company from './pages/Company';
 import Search from './pages/Search';
 import ResponsiveAppBar from './components/ResponsiveAppBar';
-import Order from './pages/Order';
+import OrderStatus from './pages/Order';
 import { Routes, Route } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Register from './pages/Register';
@@ -11,6 +11,7 @@ import { RequireAuth } from 'react-auth-kit'
 import Orders from './pages/Orders';
 import Buynow from './pages/Buynow';
 import Logout from './pages/Logout';
+import ManageCompany from './pages/ManageCompany';
 
 
 
@@ -34,12 +35,12 @@ function App() {
           } />
           <Route path="company/:companyId" element={
             <RequireAuth loginPath='/login'>
-              <Company/>
+              <Company />
             </RequireAuth>
           } />
-          <Route path="order-done/:id" element={
+          <Route path="order/:orderId" element={
             <RequireAuth loginPath='/login'>
-              <Order />
+              <OrderStatus />
             </RequireAuth>
           } />
           <Route path="orders" element={
@@ -52,9 +53,14 @@ function App() {
               <Buynow />
             </RequireAuth>
           } />
-           <Route path="logout" element={
+          <Route path="logout" element={
             <RequireAuth loginPath='/login'>
               <Logout />
+            </RequireAuth>
+          } />
+          <Route path="manage-company" element={
+            <RequireAuth loginPath='/login'>
+              <ManageCompany />
             </RequireAuth>
           } />
         </Routes>

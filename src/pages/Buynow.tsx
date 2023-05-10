@@ -6,7 +6,10 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { useState } from 'react';
 import { Button } from '@mui/material';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import axiosClient from '../api/axiosInstance';
+import { useAuthUser } from 'react-auth-kit'
+
 
 
 
@@ -17,6 +20,9 @@ function Buynow() {
     const { name } = useParams();
     const { description } = useParams();
     const { price } = useParams();
+    const { companyId } = useParams();
+    const { email } = JSON.parse(localStorage.getItem('_auth_state') || '');
+    const navigate = useNavigate();
 
     const Service = {
         name: name,
@@ -29,9 +35,16 @@ function Buynow() {
         return <div>Please use a select a service</div>
     }
 
-    console.log(Service.description);
-    console.log(Service.name);
-    console.log(Service.price);
+    const handleSubmit = () => {
+        try {
+            axiosClient.post('orders/create', { 'userEmail': email, 'companyId': companyId, 'serviceName': name, 'desiredDate': date, 'price': price })
+                .then((res) => {
+                    navigate('/order/' + res.data['orderId']);
+                })
+        } catch (err) {
+            console.log('Error' + err);
+        }
+    }
 
     return (
         <Container maxWidth="xl">
@@ -43,7 +56,7 @@ function Buynow() {
                     <DatePicker disablePast label="Basic date picker" selectedSections="day" value={fullDate} onChange={(fullDate) => { setDate(fullDate['$d']); }} />
                 </DemoContainer>
             </LocalizationProvider>
-            <Button variant='contained' sx={{ my: '10px' }}> Buy now</Button>
+            <Button variant='contained' sx={{ my: '10px' }} onClick={handleSubmit}> Buy now</Button>
         </Container>);
 }
 

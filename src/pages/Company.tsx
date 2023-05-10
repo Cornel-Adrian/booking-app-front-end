@@ -36,7 +36,6 @@ function Company() {
         try {
             axiosClient.get('company/' + companyId).then((res) => {
                 setCompany(res.data);
-                console.log(res.data);
             })
         } catch (err) {
 
@@ -71,7 +70,7 @@ function Company() {
                                     <TableCell align='center'>{row.price}</TableCell>
                                     <TableCell align='right'>
                                         <Button sx={{ background: '#2c5d4f' }} variant="contained" onClick={() => {
-                                            navigate('/buynow/' + row.name + '/' + row.description + '/' + row.price);
+                                            navigate('buynow/' + row.name + '/' + row.description + '/' + row.price);
                                         }}>Buy Now</Button>
                                     </TableCell>
                                 </TableRow>
