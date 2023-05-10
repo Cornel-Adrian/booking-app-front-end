@@ -19,7 +19,7 @@ export default function CompanyCard({ companyId, companyName, companyDescription
 
 
   return (
-    <Card onClick={() => { navigate('company/' + companyId) }} sx={{ margin: '8rem', minWidth: 275, }}>
+    <Card onClick={() => { navigate('/company/' + companyId) }} sx={{ margin: '8rem', minWidth: 275, }}>
       <CardActionArea>
         <CardContent >
           <Typography gutterBottom variant="caption" component="div">

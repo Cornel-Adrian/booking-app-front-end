@@ -36,6 +36,7 @@ function Company() {
         try {
             axiosClient.get('company/' + companyId).then((res) => {
                 setCompany(res.data);
+                console.log(res.data);
             })
         } catch (err) {
 
