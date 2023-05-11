@@ -23,7 +23,7 @@ function ManageCompany() {
     await axiosClient.get('/orders/findByCompanyEmail/' + email).then((res) => {
       setOrders(res.data)
     })
-  }, [])
+  }, [email])
 
 
   const acceptOrder = (async (id: string) => {

@@ -18,18 +18,15 @@ function Search() {
     const [page, setPage] = useState<number>(1);
     const itemsPerPage: number = 3;
     const [companies, setCompanies] = useState<Company[]>([]);
-    const [search, setSearch] = useState<string | undefined>();
+    const [search, setSearch] = useState<string | undefined>('');
+    const getAll = async () => {
+        axiosClient.get('/company/all/basic').then((res) => res).then(data => {
+            setCompanies(data.data);
+        })
+    }
 
     useEffect(() => {
-        try {
-            axiosClient.get('/company/all/basic').then((res) => res).then(data => {
-                setCompanies(data.data);
-
-            })
-
-        } catch (err) {
-            console.log(err);
-        }
+        getAll();
     }, [])
 
 
@@ -37,26 +34,21 @@ function Search() {
         setPage(value);
     };
 
-    const cards: Company[] = [
-        { companyId: "1", name: 'Card 1', description: 'This is the content of Card 1' },
-        { companyId: "2", name: 'Card 2', description: 'This is the content of Card 2' },
-        { companyId: "3", name: 'Card 3', description: 'This is the content of Card 3' },
-        { companyId: "4", name: 'Card 4', description: 'This is the content of Card 4' },
-        { companyId: "5", name: 'Card 5', description: 'This is the content of Card 5' },
-        { companyId: "6", name: 'Card 6', description: 'This is the content of Card 6' },
-
-    ];
-
     const startIndex: number = (page - 1) * itemsPerPage;
     const endIndex: number = startIndex + itemsPerPage;
     const paginatedCards: Company[] = companies.slice(startIndex, endIndex);
 
     const submitSearch = () => {
-        
+
+        if (search === null || search === '') return getAll();
+
+        axiosClient.get('company/find/' + search).then((res) => {
+            setCompanies(res.data);
+        })
     }
 
 
-    
+
 
 
 
@@ -79,7 +71,7 @@ function Search() {
                     <CompanyCard key={card.companyId} companyName={card.name} companyDescription={card.description} companyId={card.companyId} ></CompanyCard>
                 ))}
                 <Pagination
-                    count={Math.ceil(cards.length / itemsPerPage)}
+                    count={Math.ceil(companies.length / itemsPerPage)}
                     page={page}
                     onChange={handleChange}
                     sx={{ display: 'flex', justifyContent: 'center' }}
