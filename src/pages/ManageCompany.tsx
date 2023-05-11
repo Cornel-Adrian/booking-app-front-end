@@ -1,5 +1,5 @@
 import { Container, TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody, Button } from "@mui/material";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import axiosClient from "../api/axiosInstance";
 
 function ManageCompany() {
@@ -15,26 +15,41 @@ function ManageCompany() {
   }
 
   const [orders, setOrders] = useState([]);
-  const [companyId, setCompanyId] = useState<string>('');
   const { email } = JSON.parse(localStorage.getItem('_auth_state') || '');
 
+
+  const getCompanyOrders = useCallback(async () => {
+    console.log(email);
+    await axiosClient.get('/orders/findByCompanyEmail/' + email).then((res) => {
+      setOrders(res.data)
+    })
+  }, [])
+
+
+  const acceptOrder = (async (id: string) => {
+    await axiosClient.patch('/orders/accept/' + id);
+    getCompanyOrders()
+  })
+
+  const completeOrder = (async (id: string) => {
+    await axiosClient.patch('/orders/complete/' + id);
+    getCompanyOrders()
+  })
+
+  const cancelOrder = (async (id: string) => {
+    await axiosClient.patch('/orders/cancel/' + id);
+    getCompanyOrders()
+  })
+
+
   useEffect(() => {
-
     try {
-      axiosClient.get('/company/findCompanyId/' + email).then((res) => {
-        setCompanyId(res.data['companyId']);
-      })
-
-      axiosClient.get('/orders/findByCompanyId/' + companyId).then((res) => {
-        setOrders(res.data)
-      })
-
+      getCompanyOrders();
     } catch (err) {
       console.log(err);
     }
-
-
-  }, [email])
+    return;
+  }, [getCompanyOrders])
 
 
   return (
@@ -46,8 +61,9 @@ function ManageCompany() {
               <TableCell>Service</TableCell>
               <TableCell>Desired Date</TableCell>
 
-              <TableCell align='center'> Status</TableCell>
+              <TableCell align='center'> Update</TableCell>
               <TableCell align='center'>Price</TableCell>
+              <TableCell align='center'>Status</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -58,12 +74,12 @@ function ManageCompany() {
                 <TableCell>{row.serviceName}</TableCell>
                 <TableCell>{row.desiredDate.slice(0, 10)}</TableCell>
                 <TableCell align='center'>
-                  <Button>Accept</Button>
-                  <Button>Complete</Button>
-                  <Button>Cancel</Button>
+                  <Button onClick={() => { acceptOrder(row.orderId) }} disabled={['accepted', 'done', 'canceled'].includes(row.status)}>Accept</Button>
+                  <Button onClick={() => { completeOrder(row.orderId) }} disabled={['done', 'canceled', 'new'].includes(row.status)}>Complete</Button>
+                  <Button onClick={() => { cancelOrder(row.orderId) }} disabled={['canceled', 'done'].includes(row.status)}>Cancel</Button>
                 </TableCell>
                 <TableCell align='center'>{row.price}</TableCell>
-
+                <TableCell align='center'>{row.status}</TableCell>
               </TableRow>
             )) : <></>}
           </TableBody>
