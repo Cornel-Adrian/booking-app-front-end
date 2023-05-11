@@ -25,7 +25,7 @@ function Orders() {
             setOrders(res.data);
         })
 
-    }, [])
+    }, [email])
 
 
 
@@ -51,7 +51,7 @@ function Orders() {
                                 <TableCell align='center'>{row.price}</TableCell>
                                 <TableCell align='right'>{row.status}</TableCell>
                             </TableRow>
-                        )) : <div>Nothing purchased</div>}
+                        )) : <></>}
                     </TableBody>
                 </Table>
             </TableContainer >

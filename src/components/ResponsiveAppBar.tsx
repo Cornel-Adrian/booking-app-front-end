@@ -12,17 +12,36 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import logo from './logo.png'
-import { useSignOut } from 'react-auth-kit'
 import { useNavigate } from "react-router-dom";
 import { useIsAuthenticated } from 'react-auth-kit';
+import { useEffect, useState } from 'react';
 
 
-const settings = ['Account', 'Orders', 'Logout'];
+
 
 function ResponsiveAppBar() {
+
+  const [settings, setSettings] = useState<string[]>(['Account', 'Orders', 'Logout', 'Manage'])
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
   const isAuthenticated = useIsAuthenticated();
+
+
+  useEffect(() => {
+    if (isAuthenticated()) {
+      const authState: { role: string, email: string } = JSON.parse(localStorage.getItem('_auth_state') as string);
+      const { role } = authState;
+      if (role !== 'company') {
+        let change = settings.filter(el => el !== 'Manage');
+        setSettings(change);
+      }
+    }
+    return;
+  }, [])
+
+
+
+
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -108,7 +127,6 @@ function ResponsiveAppBar() {
                     <Typography textAlign="center">{setting}</Typography>
                   </MenuItem>
                 ))}
-                
               </Menu>
             </Box>
           </Toolbar>
@@ -116,6 +134,6 @@ function ResponsiveAppBar() {
       </AppBar>
     );
   }
-  else return (<div></div>);
+  else return (<></>);
 }
 export default ResponsiveAppBar;

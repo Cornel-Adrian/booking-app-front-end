@@ -23,7 +23,6 @@ function Search() {
     useEffect(() => {
         try {
             axiosClient.get('/company/all/basic').then((res) => res).then(data => {
-                console.log(data.data);
                 setCompanies(data.data);
 
             })

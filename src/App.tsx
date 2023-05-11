@@ -58,7 +58,7 @@ function App() {
               <Logout />
             </RequireAuth>
           } />
-          <Route path="manage-company" element={
+          <Route path="manage" element={
             <RequireAuth loginPath='/login'>
               <ManageCompany />
             </RequireAuth>

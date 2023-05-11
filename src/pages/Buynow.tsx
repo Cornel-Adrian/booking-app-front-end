@@ -8,7 +8,6 @@ import { useState } from 'react';
 import { Button } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
 import axiosClient from '../api/axiosInstance';
-import { useAuthUser } from 'react-auth-kit'
 
 
 
