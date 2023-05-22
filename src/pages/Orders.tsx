@@ -2,6 +2,7 @@ import { TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody
 import Container from '@mui/material/Container';
 import { useEffect, useState } from 'react';
 import axiosClient from '../api/axiosInstance';
+import { useNavigate } from 'react-router-dom'
 
 
 function Orders() {
@@ -18,6 +19,7 @@ function Orders() {
 
     const [orders, setOrders] = useState([]);
     const { email } = JSON.parse(localStorage.getItem('_auth_state') || '');
+    const navigate = useNavigate();
 
 
     useEffect(() => {
@@ -45,9 +47,11 @@ function Orders() {
                         {orders ? orders.map((row: Order) => (
                             <TableRow
                                 key={row.orderId}
+                                onClick={() => { navigate('/order/' + row.orderId) }}
+                                hover={true}
                             >
                                 <TableCell>{row.serviceName}</TableCell>
-                                <TableCell>{row.desiredDate.slice(0,10)}</TableCell>
+                                <TableCell>{row.desiredDate.slice(0, 10)}</TableCell>
                                 <TableCell align='center'>{row.price}</TableCell>
                                 <TableCell align='right'>{row.status}</TableCell>
                             </TableRow>

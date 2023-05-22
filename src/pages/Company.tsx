@@ -43,7 +43,7 @@ function Company() {
         }
 
         return
-    }, [])
+    }, [companyId])
 
     return (
 
@@ -76,7 +76,7 @@ function Company() {
                                         }}>Programeaza</Button>
                                     </TableCell>
                                 </TableRow>
-                            )) : <Container sx={{ display: 'block' }}><Typography variant='h3' sx={{ mx: '10', textAlign: 'center' }}>Nici un serviciu disponibil</Typography></Container>
+                            )) : <TableRow sx={{ display: 'block' }}><TableCell><Typography variant='h3' sx={{ mx: '10', textAlign: 'center' }}>Nici un serviciu disponibil</Typography></TableCell></TableRow>
                             }</TableBody>
                     </Table>
                 </TableContainer >

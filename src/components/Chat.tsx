@@ -28,8 +28,8 @@ const Chat: React.FC = () => {
     };
 
     return (
-        <div>
-            <Typography variant="h5" sx={{ marginTop: "140px" }} align="center" gutterBottom>
+        <Box sx={{ marginTop: "140px" }}>
+            <Typography variant="h5" align="center" gutterBottom>
                 Chat
             </Typography>
             <Box sx={{
@@ -40,16 +40,27 @@ const Chat: React.FC = () => {
                 overflow: 'scroll'
             }}>
                 {messages.map((message) => (
-                    <Typography
-                        key={message.id}
-                        variant="body1"
-                        align={message.sender == "user" ? "left" : "right"}
-                        sx={{
-                            marginBottom: "10px",
-                        }}
-                    >
-                        {message.content}
-                    </Typography>
+                    <Box sx={{
+                        minWidth: '20px',
+                        display: 'flex',
+                    }}>
+                        <Box sx={{
+                            borderRadius: '10px',
+                            border: '2px solid #e3e2e2',
+                            background:'#cdcdcd'
+                        }}>
+                            <Typography
+                                key={message.id}
+                                variant="body1"
+                                align={message.sender === "user" ? "left" : "right"}
+                                sx={{
+                                    marginBottom: "10px",
+                                }}
+                            >
+                                {message.content}
+                            </Typography>
+                        </Box>
+                    </Box>
                 ))}
             </Box>
             <Box sx={{
@@ -60,16 +71,16 @@ const Chat: React.FC = () => {
                 <TextField
                     value={inputValue}
                     onChange={(e) => setInputValue(e.target.value)}
-                    label="Message"
+                    label="Text"
                     variant="outlined"
                     fullWidth
                     disabled={false}
                 />
                 <Button variant="contained" color="primary" onClick={handleSendMessage}>
-                    Send
+                    Trimite
                 </Button>
             </Box>
-        </div>
+        </Box>
     );
 };
 
