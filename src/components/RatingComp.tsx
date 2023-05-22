@@ -13,7 +13,7 @@ function RatingComp({ companyId }: RatingCompProps) {
 
     try {
       axiosClient.get('reviews/average/' + companyId).then((res) => {
-        if (res.data == "") setValue(0);
+        if (res.data === "") setValue(0);
         else setValue(res.data);
       })
     } catch (err) {
@@ -21,7 +21,7 @@ function RatingComp({ companyId }: RatingCompProps) {
     }
 
     return
-  }, [])
+  }, [companyId])
 
 
 

@@ -58,9 +58,9 @@ function ManageCompany() {
           <TableHead>
             <TableRow>
               <TableCell>Service</TableCell>
-              <TableCell>Desired Date</TableCell>
+              <TableCell>Data Livrare</TableCell>
               <TableCell align='center'>Actiune</TableCell>
-              <TableCell align='center'>Price</TableCell>
+              <TableCell align='center'>Pret</TableCell>
               <TableCell align='center'>Status</TableCell>
             </TableRow>
           </TableHead>

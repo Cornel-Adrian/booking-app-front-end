@@ -57,14 +57,14 @@ function Search() {
 
             <TextField
                 id="filled-flexible"
-                label="Search"
+                label="Cauta"
                 value={search}
                 onChange={(e) => { setSearch(e.target.value) }}
                 maxRows={4}
                 sx={{ margin: '1rem' }}
             />
             <Button variant='outlined' onClick={submitSearch} type='submit' sx={{ margin: '1.5rem', color: 'gray' }}>
-                Search
+                Cauta
             </Button>
             <Container maxWidth='lg' sx={{ marginTop: '1rem', mx: 'auto' }}>
                 {paginatedCards.map((card) => (

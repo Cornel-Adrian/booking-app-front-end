@@ -5,6 +5,7 @@ import { useParams } from "react-router";
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import RatingComp from '../components/RatingComp';
+import TabelReviews from '../components/TabelReviews';
 
 
 
@@ -80,6 +81,7 @@ function Company() {
                             }</TableBody>
                     </Table>
                 </TableContainer >
+                <TabelReviews></TabelReviews>
             </Container>
         </Container>
     );
