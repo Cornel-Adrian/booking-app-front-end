@@ -52,10 +52,10 @@ function Buynow() {
             <Typography variant="h4" sx={{ my: "40px", fontFamily: 'serif' }}>{Service.price}</Typography>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DemoContainer components={['DatePicker']} sx={{ display: 'block' }}>
-                    <DatePicker disablePast label="Basic date picker" selectedSections="day" value={fullDate} onChange={(fullDate) => { setDate(fullDate['$d']); }} />
+                    <DatePicker disablePast selectedSections="day" value={fullDate} onChange={(fullDate) => { setDate(fullDate['$d']); }} />
                 </DemoContainer>
             </LocalizationProvider>
-            <Button variant='contained' sx={{ my: '10px' }} onClick={handleSubmit}> Buy now</Button>
+            <Button variant='contained' sx={{ my: '10px' }} onClick={handleSubmit}>Rezerva</Button>
         </Container>);
 }
 

@@ -19,7 +19,6 @@ function ManageCompany() {
 
 
   const getCompanyOrders = useCallback(async () => {
-    console.log(email);
     await axiosClient.get('/orders/findByCompanyEmail/' + email).then((res) => {
       setOrders(res.data)
     })

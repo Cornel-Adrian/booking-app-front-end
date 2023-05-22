@@ -35,9 +35,9 @@ function Orders() {
                 <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
                     <TableHead>
                         <TableRow>
-                            <TableCell>Service</TableCell>
-                            <TableCell>Desired Date</TableCell>
-                            <TableCell align='center'>Price</TableCell>
+                            <TableCell>Serviciu</TableCell>
+                            <TableCell>Data livrare</TableCell>
+                            <TableCell align='center'>Pret</TableCell>
                             <TableCell align='right'> Status</TableCell>
                         </TableRow>
                     </TableHead>

@@ -12,6 +12,7 @@ import Orders from './pages/Orders';
 import Buynow from './pages/Buynow';
 import Logout from './pages/Logout';
 import ManageCompany from './pages/ManageCompany';
+import BarChart from './components/BarChart';
 
 
 
@@ -63,6 +64,7 @@ function App() {
               <ManageCompany />
             </RequireAuth>
           } />
+          <Route path='/chart' element={<BarChart/>} ></Route>
         </Routes>
       </div>
     </QueryClientProvider >

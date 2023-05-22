@@ -4,6 +4,7 @@ import axiosClient from '../api/axiosInstance';
 import { useParams } from "react-router";
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import RatingComp from '../components/RatingComp';
 
 
 
@@ -49,14 +50,15 @@ function Company() {
         <Container maxWidth="xl">
             <Typography variant='h2' sx={{ m: 10 }}>{company?.name}</Typography>
             <Typography variant='body1'>{company?.description}</Typography>
+            <RatingComp companyId={companyId}></RatingComp>
             <Container maxWidth="xl">
                 <TableContainer component={Paper} sx={{ marginTop: 5 }}>
                     <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
                         <TableHead>
                             <TableRow>
-                                <TableCell>Name</TableCell>
-                                <TableCell>Service description</TableCell>
-                                <TableCell align='center'>Price</TableCell>
+                                <TableCell>Nume</TableCell>
+                                <TableCell>Descriere</TableCell>
+                                <TableCell align='center'>Pret</TableCell>
                                 <TableCell></TableCell>
                             </TableRow>
                         </TableHead>
@@ -71,10 +73,10 @@ function Company() {
                                     <TableCell align='right'>
                                         <Button sx={{ background: '#2c5d4f' }} variant="contained" onClick={() => {
                                             navigate('buynow/' + row.name + '/' + row.description + '/' + row.price);
-                                        }}>Buy Now</Button>
+                                        }}>Programeaza</Button>
                                     </TableCell>
                                 </TableRow>
-                            )) : <Container sx={{ display: 'block' }}><Typography variant='h3' sx={{ mx: '10', textAlign: 'center' }}>No services available</Typography></Container>
+                            )) : <Container sx={{ display: 'block' }}><Typography variant='h3' sx={{ mx: '10', textAlign: 'center' }}>Nici un serviciu disponibil</Typography></Container>
                             }</TableBody>
                     </Table>
                 </TableContainer >
