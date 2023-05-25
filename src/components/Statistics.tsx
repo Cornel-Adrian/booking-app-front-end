@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardContent, Typography } from '@material-ui/core';
+import { Box, Card, CardContent, Typography } from '@material-ui/core';
 
 interface Order {
   id: number;
@@ -18,22 +18,22 @@ const Statistics: React.FC<OrdersStatisticsProps> = ({ orders }) => {
   const completedOrders = orders.filter(order => order.status === 'done').length;
 
   return (
-    <Card>
-      <CardContent>
-        <Typography variant="h5" component="h2">
-          Statistici livrari
-        </Typography>
-        <Typography color="textSecondary" gutterBottom>
-          Total Livrari: {totalOrders}
-        </Typography>
-        <Typography color="textSecondary" gutterBottom>
-          Total Venituri: {totalRevenue} lei
-        </Typography>
-        <Typography color="textSecondary" gutterBottom>
-          Livrari facute: {completedOrders}
-        </Typography>
-      </CardContent>
-    </Card>
+      <Card>
+        <CardContent style={{}}>
+          <Typography variant="h5" component="h2">
+            Statistici livrari
+          </Typography>
+          <Typography color="textSecondary" gutterBottom>
+            Total Livrari: {totalOrders}
+          </Typography>
+          <Typography color="textSecondary" gutterBottom>
+            Total Venituri: {totalRevenue} lei
+          </Typography>
+          <Typography color="textSecondary" gutterBottom>
+            Livrari facute: {completedOrders}
+          </Typography>
+        </CardContent>
+      </Card>
   );
 };
 

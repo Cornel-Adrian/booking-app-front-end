@@ -34,8 +34,8 @@ function TabelReviews() {
             <Typography variant="h4">Review-uri</Typography>
             <List sx={{ display: 'flex', flexDirection: 'column', justifyContent: "space-evenly" }}>
                 {reviews ? reviews.map((review) => (
-                    <Box sx={{alignSelf:'center'}}>
-                        <ListItem sx={{display:'block'}}>
+                    <Box sx={{ alignSelf: 'center' }}>
+                        <ListItem key={review.reviewId + "_"} sx={{ display: 'block' }}>
                             <Box textAlign="left">
                                 <ListItemText key={review.reviewId} primary={review.name}
                                     sx={{ m: "20px", mx: 'auto' }}

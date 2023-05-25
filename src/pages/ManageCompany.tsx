@@ -54,7 +54,7 @@ function ManageCompany() {
 
   return (
     <Container maxWidth="xl">
-      <Box sx={{display:"flex" , justifyContent:"space-around", gap:"10px", my:"150px"}}>
+      <Box sx={{display:"flex", flex:"auto" , justifyContent:"space-around", gap:"10px", my:"150px"}}>
         <Statistics orders={orders}></Statistics>
         <TableContainer component={Paper} sx={{}}>
           <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
