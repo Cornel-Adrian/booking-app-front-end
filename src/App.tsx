@@ -12,7 +12,7 @@ import Orders from './pages/Orders';
 import Buynow from './pages/Buynow';
 import Logout from './pages/Logout';
 import ManageCompany from './pages/ManageCompany';
-import BarChart from './components/BarChart';
+import Statistics from './components/Statistics';
 
 
 
@@ -64,7 +64,7 @@ function App() {
               <ManageCompany />
             </RequireAuth>
           } />
-          <Route path='/chart' element={<BarChart/>} ></Route>
+          <Route path='/statistics' element={<Statistics orders={[]} />} ></Route>
         </Routes>
       </div>
     </QueryClientProvider >

@@ -1,6 +1,7 @@
-import { Container, TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody, Button } from "@mui/material";
+import { Container, TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody, Button, Box } from "@mui/material";
 import { useState, useEffect, useCallback } from "react";
 import axiosClient from "../api/axiosInstance";
+import Statistics from "../components/Statistics";
 
 function ManageCompany() {
 
@@ -53,37 +54,39 @@ function ManageCompany() {
 
   return (
     <Container maxWidth="xl">
-      <TableContainer component={Paper} sx={{ marginTop: 5 }}>
-        <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
-          <TableHead>
-            <TableRow>
-              <TableCell>Service</TableCell>
-              <TableCell>Data Livrare</TableCell>
-              <TableCell align='center'>Actiune</TableCell>
-              <TableCell align='center'>Pret</TableCell>
-              <TableCell align='center'>Status</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {orders ? orders.map((row: Order) => (
-              <TableRow
-                key={row.orderId}
-              >
-                <TableCell>{row.serviceName}</TableCell>
-                <TableCell>{row.desiredDate.slice(0, 10)}</TableCell>
-                <TableCell align='center'>
-                  <Button onClick={() => { acceptOrder(row.orderId) }} disabled={['accepted', 'done', 'canceled'].includes(row.status)}>Accepta</Button>
-                  <Button onClick={() => { completeOrder(row.orderId) }} disabled={['done', 'canceled', 'new'].includes(row.status)}>Livreaza</Button>
-                  <Button onClick={() => { cancelOrder(row.orderId) }} disabled={['canceled', 'done'].includes(row.status)}>Anuleaza</Button>
-                </TableCell>
-                <TableCell align='center'>{row.price}</TableCell>
-                <TableCell align='center'>{row.status}</TableCell>
+      <Box sx={{display:"flex" , justifyContent:"space-around", gap:"10px", my:"150px"}}>
+        <Statistics orders={orders}></Statistics>
+        <TableContainer component={Paper} sx={{}}>
+          <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+            <TableHead>
+              <TableRow>
+                <TableCell>Service</TableCell>
+                <TableCell>Data Livrare</TableCell>
+                <TableCell align='center'>Actiune</TableCell>
+                <TableCell align='center'>Pret</TableCell>
+                <TableCell align='center'>Status</TableCell>
               </TableRow>
-            )) : <></>}
-          </TableBody>
-        </Table>
-      </TableContainer >
-
+            </TableHead>
+            <TableBody>
+              {orders ? orders.map((row: Order) => (
+                <TableRow
+                  key={row.orderId}
+                >
+                  <TableCell>{row.serviceName}</TableCell>
+                  <TableCell>{row.desiredDate.slice(0, 10)}</TableCell>
+                  <TableCell align='center'>
+                    <Button onClick={() => { acceptOrder(row.orderId) }} disabled={['accepted', 'done', 'canceled'].includes(row.status)}>Accepta</Button>
+                    <Button onClick={() => { completeOrder(row.orderId) }} disabled={['done', 'canceled', 'new'].includes(row.status)}>Livreaza</Button>
+                    <Button onClick={() => { cancelOrder(row.orderId) }} disabled={['canceled', 'done'].includes(row.status)}>Anuleaza</Button>
+                  </TableCell>
+                  <TableCell align='center'>{row.price}</TableCell>
+                  <TableCell align='center'>{row.status}</TableCell>
+                </TableRow>
+              )) : <></>}
+            </TableBody>
+          </Table>
+        </TableContainer >
+      </Box>
     </Container>);
 }
 

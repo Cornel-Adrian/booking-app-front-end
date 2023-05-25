@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, TextField, Button, Typography } from "@mui/material";
+import io, { Socket } from 'socket.io-client'
 
 
 
@@ -11,6 +12,7 @@ interface Message {
 
 const Chat: React.FC = () => {
 
+    const [socket, setSocket] = useState<Socket>();
     const [messages, setMessages] = useState<Message[]>([]);
     const [inputValue, setInputValue] = useState("");
 
@@ -24,8 +26,16 @@ const Chat: React.FC = () => {
         };
 
         setMessages([...messages, newMessage]);
+        socket?.emit("message", newMessage);
         setInputValue("");
     };
+
+
+    useEffect(() => {
+        const newSocket = io('http://localhost:8001')
+        setSocket(newSocket);
+
+    }, [setSocket])
 
     return (
         <Box sx={{ marginTop: "140px" }}>
@@ -47,7 +57,7 @@ const Chat: React.FC = () => {
                         <Box sx={{
                             borderRadius: '10px',
                             border: '2px solid #e3e2e2',
-                            background:'#cdcdcd'
+                            background: '#cdcdcd'
                         }}>
                             <Typography
                                 key={message.id}
