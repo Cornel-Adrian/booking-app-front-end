@@ -2,6 +2,7 @@ import { Container, TableContainer, Paper, Table, TableHead, TableRow, TableCell
 import { useState, useEffect, useCallback } from "react";
 import axiosClient from "../api/axiosInstance";
 import Statistics from "../components/Statistics";
+import { useNavigate } from "react-router-dom";
 
 function ManageCompany() {
 
@@ -17,6 +18,7 @@ function ManageCompany() {
 
   const [orders, setOrders] = useState([]);
   const { email } = JSON.parse(localStorage.getItem('_auth_state') || '');
+  const navigate = useNavigate();
 
 
   const getCompanyOrders = useCallback(async () => {
@@ -41,6 +43,10 @@ function ManageCompany() {
     getCompanyOrders()
   })
 
+  const sendToChat = (orderId: string) => {
+    navigate("/order/chat", { state: { orderId: orderId, sender: "company" } })
+  }
+
 
   useEffect(() => {
     try {
@@ -54,7 +60,7 @@ function ManageCompany() {
 
   return (
     <Container maxWidth="xl">
-      <Box sx={{display:"flex", flex:"auto" , justifyContent:"space-around", gap:"10px", my:"150px"}}>
+      <Box sx={{ display: "flex", flex: "auto", justifyContent: "space-around", gap: "10px", my: "150px" }}>
         <Statistics orders={orders}></Statistics>
         <TableContainer component={Paper} sx={{}}>
           <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
@@ -78,6 +84,7 @@ function ManageCompany() {
                     <Button onClick={() => { acceptOrder(row.orderId) }} disabled={['accepted', 'done', 'canceled'].includes(row.status)}>Accepta</Button>
                     <Button onClick={() => { completeOrder(row.orderId) }} disabled={['done', 'canceled', 'new'].includes(row.status)}>Livreaza</Button>
                     <Button onClick={() => { cancelOrder(row.orderId) }} disabled={['canceled', 'done'].includes(row.status)}>Anuleaza</Button>
+                    <Button onClick={() => { sendToChat(row.orderId) }} disabled={['canceled', 'done'].includes(row.status)}>Chat</Button>
                   </TableCell>
                   <TableCell align='center'>{row.price}</TableCell>
                   <TableCell align='center'>{row.status}</TableCell>

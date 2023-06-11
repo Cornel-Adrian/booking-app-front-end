@@ -43,7 +43,7 @@ function OrderStatus() {
                         <Typography variant="h5" sx={{ fontFamily: 'serif' }}>Status: Programare plasata</Typography>
                         <Typography variant="h5" sx={{ fontFamily: 'serif' }}>Data de livrare: {date}</Typography>
                     </Box>
-                    <Chat></Chat>
+                    <Chat sender='user' orderId={orderId}></Chat>
 
                 </Container>);
         }
@@ -57,7 +57,7 @@ function OrderStatus() {
                         <Typography variant="h5" sx={{ fontFamily: 'serif' }}>Status: In curs de procesare</Typography>
                         <Typography variant="h5" sx={{ fontFamily: 'serif' }}>Data de livrare: {date}</Typography>
                     </Box>
-                    <Chat></Chat>
+                    <Chat sender='user' orderId={orderId}></Chat>
 
                 </Container>);
         }

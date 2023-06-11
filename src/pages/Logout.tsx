@@ -13,7 +13,7 @@ function Logout() {
     useEffect(() => {
         signOut();
         navigate('/login');
-    }, [])
+    }, [navigate, signOut])
     return (
         <div>Logout</div>
     )

@@ -21,7 +21,7 @@ import { useEffect, useState } from 'react';
 
 function ResponsiveAppBar() {
 
-  const [settings, setSettings] = useState<string[]>(['Account', 'Orders', 'Logout', 'Manage'])
+  const [settings, setSettings] = useState<string[]>(['Account', 'Orders', 'Logout', 'Manage']);
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
   const isAuthenticated = useIsAuthenticated();
@@ -37,7 +37,7 @@ function ResponsiveAppBar() {
       }
     }
     return;
-  }, [])
+  }, [isAuthenticated, settings])
 
 
 
@@ -134,6 +134,49 @@ function ResponsiveAppBar() {
       </AppBar>
     );
   }
-  else return (<></>);
-}
+  else {
+    return (
+      <AppBar position="static" sx={{ background: "#2c5d4f" }}>
+        <Container maxWidth="xl">
+          <Toolbar disableGutters sx={{ display: 'flex', justifyContent: 'space-between', mx: '10%' }}>
+            <a href='/search'><img alt='logo' src={logo} height={'40px'} width={'40px'}></img></a>
+            <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleOpenNavMenu}
+                color="inherit"
+              >
+                <MenuIcon />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorElNav}
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'left',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'left',
+                }}
+                open={Boolean(anchorElNav)}
+                onClose={handleCloseNavMenu}
+                sx={{
+                  display: { xs: 'block', md: 'none' },
+                }}
+              >
+              </Menu>
+            </Box>
+          </Toolbar>
+        </Container>
+      </AppBar>
+    );
+  }
+
+
+};
 export default ResponsiveAppBar;

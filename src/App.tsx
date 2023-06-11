@@ -12,7 +12,7 @@ import Orders from './pages/Orders';
 import Buynow from './pages/Buynow';
 import Logout from './pages/Logout';
 import ManageCompany from './pages/ManageCompany';
-import Statistics from './components/Statistics';
+import OrderChat from './pages/OrderChat';
 
 
 
@@ -64,7 +64,7 @@ function App() {
               <ManageCompany />
             </RequireAuth>
           } />
-          <Route path='/statistics' element={<Statistics orders={[]} />} ></Route>
+          <Route path='order/chat' element={<OrderChat sender={undefined} orderId={undefined}/>}></Route>
         </Routes>
       </div>
     </QueryClientProvider >

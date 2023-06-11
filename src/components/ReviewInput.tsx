@@ -20,7 +20,6 @@ const ReviewInput: React.FC = () => {
 
   const { orderId } = useParams();
   const navigate = useNavigate();
-  const disable = false;
 
   useEffect(() => {
     setReview(prevReview => ({
