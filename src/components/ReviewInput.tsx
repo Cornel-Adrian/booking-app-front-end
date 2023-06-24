@@ -48,7 +48,6 @@ const ReviewInput: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Do something with the review data
     try {
       axiosClient.post('/reviews/create', review).then(() => {
         navigate('/orders');

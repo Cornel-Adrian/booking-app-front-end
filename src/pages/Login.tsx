@@ -62,12 +62,12 @@ function Login() {
                     <TextField
                         required
                         id="outlined-password-input"
-                        label="Password"
+                        label="Parola"
                         type="password"
                         autoComplete="current-password"
                         onChange={(e) => setPassword(e.target.value)}
                     />
-                    <Button sx={{ mx: 'auto', background: '#2c5d4f' }} onClick={handleSubmit} variant="contained" size="medium">Login</Button>
+                    <Button sx={{ mx: 'auto', background: '#2c5d4f' }} onClick={handleSubmit} variant="contained" size="medium">Logare</Button>
                 </div>
             </Box >
         </div >)

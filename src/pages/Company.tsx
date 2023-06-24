@@ -40,7 +40,7 @@ function Company() {
                 setCompany(res.data);
             })
         } catch (err) {
-
+            navigate("/error");
         }
 
         return

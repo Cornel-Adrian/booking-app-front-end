@@ -39,7 +39,7 @@ function Register() {
                 <div className='inputs'>
                     <TextField
                         required
-                        label="Name"
+                        label="Nume"
                         autoComplete='Name'
                         value={name}
                         onChange={(e) => setName(e.target.value)}
@@ -52,13 +52,13 @@ function Register() {
                         onChange={(e) => setEmail(e.target.value)}
                     />
                     <TextField
-                        label="Password"
+                        label="Parola"
                         type="password"
                         autoComplete="current-password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                     />
-                    <Button sx={{ mx: 'auto', background: '#2c5d4f', marginTop: 4 }} type='submit' onClick={handleSubmit} variant="contained" size="medium">Register</Button>
+                    <Button sx={{ mx: 'auto', background: '#2c5d4f', marginTop: 4 }} type='submit' onClick={handleSubmit} variant="contained" size="medium">Inregistrare</Button>
                 </div>
             </Box >
         </div >)
