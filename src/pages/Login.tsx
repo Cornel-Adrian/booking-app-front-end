@@ -68,6 +68,7 @@ function Login() {
                         onChange={(e) => setPassword(e.target.value)}
                     />
                     <Button sx={{ mx: 'auto', background: '#2c5d4f' }} onClick={handleSubmit} variant="contained" size="medium">Logare</Button>
+                    <Button sx={{ mx: 'auto', background: '#2c5d4f', mt:"10px" }} onClick={()=>{navigate('/register')}} variant="contained" size="medium">Inregistreazate</Button>
                 </div>
             </Box >
         </div >)

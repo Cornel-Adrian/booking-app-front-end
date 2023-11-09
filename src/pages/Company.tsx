@@ -53,8 +53,8 @@ function Company() {
             <Typography variant='body1'>{company?.description}</Typography>
             <RatingComp companyId={companyId}></RatingComp>
             <Container maxWidth="xl">
-                <TableContainer component={Paper} sx={{ marginTop: 5 }}>
-                    <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+                <TableContainer component={Paper} sx={{ marginTop: 5, display:'flex' , alignItems:'center', justifyContent:'center' }}>
+                    <Table sx={{}} size="small" aria-label="a dense table">
                         <TableHead>
                             <TableRow>
                                 <TableCell>Nume</TableCell>
@@ -65,7 +65,7 @@ function Company() {
                         </TableHead>
                         <TableBody>
                             {companyService ? companyService.map((row: ServiceProps) => (
-                                <TableRow
+                                <TableRow sx={{ width: "50%" }}
                                     key={row.name}
                                 >
                                     <TableCell>{row.name}</TableCell>

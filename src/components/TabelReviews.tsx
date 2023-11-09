@@ -16,6 +16,14 @@ function TabelReviews() {
     const [reviews, setReviews] = useState<Review[]>([]);
     const { companyId } = useParams();
 
+    const commonStyles = {
+        bgcolor: 'background.paper',
+        borderColor: '#92a8d1',
+        m: 1,
+        border: 1,
+        borderRadius: '16px'
+    };
+
     useEffect(() => {
         axiosClient.get("reviews/findByCompanyId/" + companyId).then((res) => {
             setReviews(res.data);
@@ -25,17 +33,12 @@ function TabelReviews() {
     }
         , [companyId, reviews]);
 
-
-
-    //<Rating sx={{ m: 2 }} name="read-only" value={value} readOnly />
-
     return (
-        <Container sx={{ marginTop: "50px" }}>
+        <Box sx={{ marginTop: "50px", alignSelf:'center' }}>
             <Typography variant="h4">Review-uri</Typography>
-            <List sx={{ display: 'flex', flexDirection: 'column', justifyContent: "space-evenly" }}>
+            <List sx={{ display: 'flex', flexDirection: 'row', justifyContent: "space-evenly", overflow: 'scroll', height: '200px',...commonStyles, }}>
                 {reviews ? reviews.map((review) => (
-                    <Box sx={{ alignSelf: 'center' }}>
-                        <ListItem key={review.reviewId + "_"} sx={{ display: 'block' }}>
+                        <ListItem key={review.reviewId + "_"} sx={{ display: 'inline-block' }}>
                             <Box textAlign="left">
                                 <ListItemText key={review.reviewId} primary={review.name}
                                     sx={{ m: "20px", mx: 'auto' }}
@@ -47,10 +50,9 @@ function TabelReviews() {
                                 <Rating sx={{ m: 2 }} name="read-only" value={review.rating} readOnly />
                             </Box>
                         </ListItem>
-                    </Box>
                 )) : <p>Nu exista Reviewuri deocamdata</p>}
             </List>
-        </Container >
+        </Box >
     )
 }
 
