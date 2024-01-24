@@ -24,20 +24,24 @@ function ResponsiveAppBar() {
   const [settings, setSettings] = useState<string[]>(['Account', 'Orders', 'Logout', 'Manage']);
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+  const [currentRole, setCurrentRole] = useState('user');
   const isAuthenticated = useIsAuthenticated();
 
 
-  useEffect(() => {
+  useEffect(()=>{
     if (isAuthenticated()) {
       const authState: { role: string, email: string } = JSON.parse(localStorage.getItem('_auth_state') as string);
       const { role } = authState;
+      setCurrentRole(role);
       if (role !== 'company') {
         let change = settings.filter(el => el !== 'Manage');
         setSettings(change);
       }
     }
     return;
-  }, [isAuthenticated, settings])
+  },[])
+
+
 
 
 

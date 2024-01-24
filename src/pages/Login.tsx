@@ -16,10 +16,10 @@ function Login() {
     const signIn = useSignIn();
     let navigate = useNavigate();
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
 
         try {
-            axiosClient.post('auth/login', { 'email': email, 'password': password }).then((res) => {
+            await axiosClient.post('auth/login', { 'email': email, 'password': password }).then((res) => {
 
                 if (signIn(
                     {
@@ -32,15 +32,11 @@ function Login() {
                     }
                 )) { navigate('/Search') }
             })
-        } catch (err) {
+        } catch (err: any) {
             console.log("Error: ", err);
         }
 
     };
-
-
-
-
 
     return (
         <div className="login">

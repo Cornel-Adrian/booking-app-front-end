@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Box, TextField, Button, Typography } from "@mui/material";
 import { useLocation } from 'react-router-dom'
 import axiosClient from "../api/axiosInstance";
-import { CreateSocket } from '../context/WebsocketContext';
 
 
 
@@ -27,17 +26,8 @@ export default function Chat({ orderId, sender }: ChatProps) {
         orderId = location.state['orderId'];
         sender = location.state['sender'];
     }
-    const socket = CreateSocket(orderId ? orderId : "");
 
     useEffect(() => {
-        socket.on('connect', () => {
-            console.log('Connected!');
-        });
-        socket.emit("join", orderId);
-        socket.on('messages', (newMessage: Message) => {
-            setMessages((prev) => [...prev, newMessage]);
-        });
-
         try {
             axiosClient.get("chats/getChat/" + orderId).then((res) => {
                 console.log(res.data);
@@ -49,8 +39,6 @@ export default function Chat({ orderId, sender }: ChatProps) {
 
         return () => {
             console.log('Unregistering Events...');
-            socket.off('connect');
-            socket.off('onMessage');
         };
     }, []);
 
@@ -72,8 +60,6 @@ export default function Chat({ orderId, sender }: ChatProps) {
         setMessages([...messages, newMessage]);
 
 
-
-        socket.emit('newMessage', newMessage);
         setInputValue("");
     };
 

@@ -13,6 +13,7 @@ import Buynow from './pages/Buynow';
 import Logout from './pages/Logout';
 import ManageCompany from './pages/ManageCompany';
 import OrderChat from './pages/OrderChat';
+import Profile from './pages/Profile';
 
 
 
@@ -64,7 +65,12 @@ function App() {
               <ManageCompany />
             </RequireAuth>
           } />
-          <Route path='order/chat' element={<OrderChat sender={undefined} orderId={undefined}/>}></Route>
+          <Route path="account" element={
+            <RequireAuth loginPath='/login'>
+              <Profile />
+            </RequireAuth>
+          } />
+          <Route path='order/chat' element={<OrderChat sender={undefined} orderId={undefined} />}></Route>
         </Routes>
       </div>
     </QueryClientProvider >

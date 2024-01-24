@@ -15,10 +15,12 @@ function Register() {
     const navigate = useNavigate();
 
 
-    function handleSubmit(){
+    function handleSubmit() {
         try {
-            axiosClient.post('user/create', {'name': name, 'email': email, 'password':password}).then(()=>{
+            axiosClient.post('user/create', { 'name': name, 'email': email, 'password': password }).then(() => {
                 navigate('/login');
+            }).catch((err) => {
+                throw (err);
             })
         } catch (err) {
             console.log(err)
