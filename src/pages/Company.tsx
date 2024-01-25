@@ -24,7 +24,7 @@ function Company() {
         name: string;
         email: string;
         description: string;
-        services: ServiceProps[];
+        services?: ServiceProps[];
     }
 
 

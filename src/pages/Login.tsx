@@ -2,10 +2,11 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import './Login.css';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useSignIn } from 'react-auth-kit';
 import axiosClient from '../api/axiosInstance';
 import { useNavigate } from 'react-router-dom';
+import AppContext from '../context/AppContext';
 
 
 function Login() {
@@ -15,6 +16,7 @@ function Login() {
     const [password, setPassword] = useState('');
     const signIn = useSignIn();
     let navigate = useNavigate();
+    const { setCurrentUser, setCurrentRole } = useContext(AppContext);
 
     const handleSubmit = async () => {
 
@@ -26,11 +28,21 @@ function Login() {
                         token: res.data.accessToken,
                         expiresIn: 3600,
                         tokenType: "Bearer",
-                        authState: { email: email, role: res.data.role },
+                        authState: { email: email },
                         //refreshToken: res.data.refreshToken,
                         //refreshTokenExpireIn: 3600
                     }
-                )) { navigate('/Search') }
+                )) {
+                    console.log("res data is", res.data);
+                    setCurrentRole(res.data.role);
+                    setCurrentUser({
+                        name: res.data.name,
+                        createdAt: res.data.createdAt,
+                        role: res.data.role,
+                        email: email,
+                    });
+                    navigate('/Search')
+                }
             })
         } catch (err: any) {
             console.log("Error: ", err);
@@ -64,7 +76,7 @@ function Login() {
                         onChange={(e) => setPassword(e.target.value)}
                     />
                     <Button sx={{ mx: 'auto', background: '#2c5d4f' }} onClick={handleSubmit} variant="contained" size="medium">Logare</Button>
-                    <Button sx={{ mx: 'auto', background: '#2c5d4f', mt:"10px" }} onClick={()=>{navigate('/register')}} variant="contained" size="medium">Inregistreazate</Button>
+                    <Button sx={{ mx: 'auto', background: '#2c5d4f', mt: "10px" }} onClick={() => { navigate('/register') }} variant="contained" size="medium">Inregistreazate</Button>
                 </div>
             </Box >
         </div >)

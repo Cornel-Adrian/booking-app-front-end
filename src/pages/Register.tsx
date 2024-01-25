@@ -3,7 +3,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { useState } from 'react';
 import axiosClient from '../api/axiosInstance';
-import { useNavigate } from 'react-router-dom';
+import { redirect } from 'react-router-dom';
 
 
 function Register() {
@@ -12,19 +12,14 @@ function Register() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
-    const navigate = useNavigate();
 
 
     function handleSubmit() {
-        try {
-            axiosClient.post('user/create', { 'name': name, 'email': email, 'password': password }).then(() => {
-                navigate('/login');
-            }).catch((err) => {
-                throw (err);
-            })
-        } catch (err) {
-            console.log(err)
-        }
+        axiosClient.post('user/create', { 'name': name, 'email': email, 'password': password }).then(() => {
+            redirect('/login');
+        }).catch((err) => {
+            throw (err);
+        })
     }
 
     return (

@@ -14,7 +14,8 @@ import AdbIcon from '@mui/icons-material/Adb';
 import logo from './logo.png'
 import { useNavigate } from "react-router-dom";
 import { useIsAuthenticated } from 'react-auth-kit';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
+import AppContext from '../context/AppContext';
 
 
 
@@ -24,22 +25,19 @@ function ResponsiveAppBar() {
   const [settings, setSettings] = useState<string[]>(['Account', 'Orders', 'Logout', 'Manage']);
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
-  const [currentRole, setCurrentRole] = useState('user');
   const isAuthenticated = useIsAuthenticated();
+  const { currentUser, currentRole } = useContext(AppContext);
 
 
-  useEffect(()=>{
+  useEffect(() => {
     if (isAuthenticated()) {
-      const authState: { role: string, email: string } = JSON.parse(localStorage.getItem('_auth_state') as string);
-      const { role } = authState;
-      setCurrentRole(role);
-      if (role !== 'company') {
+      if (currentRole !== 'company') {
         let change = settings.filter(el => el !== 'Manage');
         setSettings(change);
       }
     }
     return;
-  },[])
+  }, [currentUser])
 
 
 

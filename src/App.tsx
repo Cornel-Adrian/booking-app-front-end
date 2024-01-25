@@ -14,6 +14,7 @@ import Logout from './pages/Logout';
 import ManageCompany from './pages/ManageCompany';
 import OrderChat from './pages/OrderChat';
 import Profile from './pages/Profile';
+import Dashboard from './pages/Dashboard';
 
 
 
@@ -71,6 +72,7 @@ function App() {
             </RequireAuth>
           } />
           <Route path='order/chat' element={<OrderChat sender={undefined} orderId={undefined} />}></Route>
+          <Route path='/dashboard' element={<Dashboard />}/>
         </Routes>
       </div>
     </QueryClientProvider >
