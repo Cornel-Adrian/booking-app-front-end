@@ -7,7 +7,7 @@ import Pagination from '@mui/material/Pagination';
 import axiosClient from '../api/axiosInstance';
 
 interface Company {
-    companyId: string,
+    id: number,
     name: string,
     description: string,
 }
@@ -20,9 +20,10 @@ function Search() {
     const [companies, setCompanies] = useState<Company[]>([]);
     const [search, setSearch] = useState<string | undefined>('');
     const getAll = async () => {
-        axiosClient.get('/company/all/basic').then((res) => res).then(data => {
-            setCompanies(data.data);
-        })
+        axiosClient.get('/company/all/basic').then((res) => {
+            setCompanies(res.data);
+        }
+        )
     }
 
     useEffect(() => {
@@ -36,7 +37,7 @@ function Search() {
 
     const startIndex: number = (page - 1) * itemsPerPage;
     const endIndex: number = startIndex + itemsPerPage;
-    const paginatedCards: Company[] = companies.slice(startIndex, endIndex);
+    const paginatedCards: any[] = companies.slice(startIndex, endIndex);
 
     const submitSearch = () => {
 
@@ -45,13 +46,8 @@ function Search() {
         axiosClient.get('company/find/' + search).then((res) => {
             setCompanies(res.data);
         })
+
     }
-
-
-
-
-
-
     return (
         <Container maxWidth="xl" sx={{ marginTop: "10px" }}>
 
@@ -68,8 +64,9 @@ function Search() {
             </Button>
             <Container maxWidth='lg' sx={{ marginTop: '1rem', mx: 'auto' }}>
                 {paginatedCards.map((card) => (
-                    <CompanyCard key={card.companyId} companyName={card.name} companyDescription={card.description} companyId={card.companyId} ></CompanyCard>
-                ))}
+                    < CompanyCard key={card.companyId} companyName={card.name} companyDescription={card.description} id={card.id} ></CompanyCard>
+                ))
+                }
                 <Pagination
                     count={Math.ceil(companies.length / itemsPerPage)}
                     page={page}

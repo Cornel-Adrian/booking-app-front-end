@@ -1,9 +1,10 @@
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import axiosClient from '../api/axiosInstance';
-import { redirect } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useIsAuthenticated } from 'react-auth-kit';
 
 
 function Register() {
@@ -12,11 +13,16 @@ function Register() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
+    const isAuthenticated = useIsAuthenticated();
+    const navigate = useNavigate();
 
+    useEffect(()=>{
+        if(isAuthenticated()) navigate('/Search');
+    },[])
 
     function handleSubmit() {
         axiosClient.post('user/create', { 'name': name, 'email': email, 'password': password }).then(() => {
-            redirect('/login');
+            navigate('/login');
         }).catch((err) => {
             throw (err);
         })

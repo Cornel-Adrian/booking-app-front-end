@@ -11,15 +11,14 @@ function RatingComp({ companyId }: RatingCompProps) {
 
   useEffect(() => {
 
-    try {
-      axiosClient.get('reviews/average/' + companyId).then((res) => {
-        if (res.data === "") setValue(0);
-        else setValue(res.data);
-      })
-    } catch (err) {
-
-    }
-
+    axiosClient.get('reviews/average/' + companyId).then((res) => {
+      if (res.data === "") setValue(0);
+      else setValue(res.data);
+    }).catch((err) => {
+      if (err.response.status === 404) {
+        setValue(0);
+      }
+    })
     return
   }, [companyId])
 

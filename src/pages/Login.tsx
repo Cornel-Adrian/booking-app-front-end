@@ -2,11 +2,12 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import './Login.css';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useSignIn } from 'react-auth-kit';
 import axiosClient from '../api/axiosInstance';
 import { useNavigate } from 'react-router-dom';
 import AppContext from '../context/AppContext';
+import { useIsAuthenticated } from 'react-auth-kit';
 
 
 function Login() {
@@ -17,6 +18,11 @@ function Login() {
     const signIn = useSignIn();
     let navigate = useNavigate();
     const { setCurrentUser, setCurrentRole } = useContext(AppContext);
+    const isAuthenticated = useIsAuthenticated();
+
+    useEffect(()=>{
+        if(isAuthenticated()) navigate('/Search');
+    },[])
 
     const handleSubmit = async () => {
 

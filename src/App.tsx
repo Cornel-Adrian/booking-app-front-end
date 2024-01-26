@@ -11,7 +11,6 @@ import { RequireAuth } from 'react-auth-kit'
 import Orders from './pages/Orders';
 import Buynow from './pages/Buynow';
 import Logout from './pages/Logout';
-import ManageCompany from './pages/ManageCompany';
 import OrderChat from './pages/OrderChat';
 import Profile from './pages/Profile';
 import Dashboard from './pages/Dashboard';
@@ -36,17 +35,17 @@ function App() {
               <Search />
             </RequireAuth>
           } />
-          <Route path="company/:companyId" element={
+          <Route path="company/:id" element={
             <RequireAuth loginPath='/login'>
               <Company />
             </RequireAuth>
           } />
-          <Route path="order/:orderId" element={
+          <Route path="comenzi/:orderId" element={
             <RequireAuth loginPath='/login'>
               <OrderStatus />
             </RequireAuth>
           } />
-          <Route path="orders" element={
+          <Route path="comenzi" element={
             <RequireAuth loginPath='/login'>
               <Orders />
             </RequireAuth>
@@ -61,12 +60,12 @@ function App() {
               <Logout />
             </RequireAuth>
           } />
-          <Route path="manage" element={
+          <Route path="companie" element={
             <RequireAuth loginPath='/login'>
-              <ManageCompany />
+              <Dashboard />
             </RequireAuth>
           } />
-          <Route path="account" element={
+          <Route path="cont" element={
             <RequireAuth loginPath='/login'>
               <Profile />
             </RequireAuth>

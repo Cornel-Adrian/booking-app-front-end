@@ -9,24 +9,33 @@ export interface CompanyProps {
 
   companyName: string,
   companyDescription: string,
-  companyId: string,
+  id: number,
 }
 
 
-export default function CompanyCard({ companyId, companyName, companyDescription }: CompanyProps) {
+export default function CompanyCard(basicCompany: CompanyProps) {
 
   const navigate = useNavigate();
 
+  const toCompanyComponent = () => {
+    navigate('/company/'+ basicCompany.id, {
+      state: basicCompany
+    })
+  }
+
 
   return (
-    <Card onClick={() => { navigate('/company/' + companyId) }} sx={{ margin: '8rem', minWidth: 275, }}>
+    // <Card key={basicCompany.id} onClick={() => { navigate('/company/' + basicCompany.id) }} sx={{ margin: '8rem', minWidth: 275, }}>
+    <Card key={basicCompany.id}
+      onClick={() => { toCompanyComponent() }}
+      sx={{ margin: '8rem', minWidth: 275, }}>
       <CardActionArea>
         <CardContent >
           <Typography gutterBottom variant="caption" component="div">
-            {companyName}
+            {basicCompany.companyName}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {companyDescription}
+            {basicCompany.companyDescription}
           </Typography>
         </CardContent>
       </CardActionArea>

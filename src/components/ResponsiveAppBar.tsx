@@ -14,7 +14,7 @@ import AdbIcon from '@mui/icons-material/Adb';
 import logo from './logo.png'
 import { useNavigate } from "react-router-dom";
 import { useIsAuthenticated } from 'react-auth-kit';
-import { useEffect, useState, useContext } from 'react';
+import { useContext } from 'react';
 import AppContext from '../context/AppContext';
 
 
@@ -22,26 +22,11 @@ import AppContext from '../context/AppContext';
 
 function ResponsiveAppBar() {
 
-  const [settings, setSettings] = useState<string[]>(['Account', 'Orders', 'Logout', 'Manage']);
+  const settings = ['Cont', 'Comenzi', 'Logout', 'Companie'];
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
   const isAuthenticated = useIsAuthenticated();
-  const { currentUser, currentRole } = useContext(AppContext);
-
-
-  useEffect(() => {
-    if (isAuthenticated()) {
-      if (currentRole !== 'company') {
-        let change = settings.filter(el => el !== 'Manage');
-        setSettings(change);
-      }
-    }
-    return;
-  }, [currentUser])
-
-
-
-
+  const { currentRole } = useContext(AppContext);
 
 
 
@@ -125,9 +110,10 @@ function ResponsiveAppBar() {
                 onClose={handleCloseUserMenu}
               >
                 {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={() => { navigate('/' + setting.toString().toLocaleLowerCase()) }}>
-                    <Typography textAlign="center">{setting}</Typography>
-                  </MenuItem>
+                  setting === "Companie" && currentRole === "user" ? "" :
+                    <MenuItem key={setting} onClick={() => { navigate('/' + setting.toString().toLocaleLowerCase()) }}>
+                      <Typography textAlign="center">{setting}</Typography>
+                    </MenuItem>
                 ))}
               </Menu>
             </Box>

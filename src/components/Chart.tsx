@@ -49,7 +49,7 @@ export default function Chart() {
           ]}
           yAxis={[
             {
-              label: 'Vanzari',
+              label: 'Total in Lei',
               labelStyle: {
                 ...(theme.typography.body1 as ChartsTextStyle),
                 fill: theme.palette.text.primary,
